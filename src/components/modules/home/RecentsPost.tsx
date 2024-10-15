@@ -1,8 +1,10 @@
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
+
 import Container from "../../UI/Container";
-import { getRecentsPosts } from "@/src/services/RecentsPost";
 import Card from "../../UI/Card";
+
+import { getRecentsPosts } from "@/src/services/RecentsPost";
 import { IPost } from "@/src/types";
 
 export default async function RecentPosts() {

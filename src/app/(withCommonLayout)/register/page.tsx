@@ -1,14 +1,12 @@
 "use client";
 
-import FXForm from "@/src/components/form/FXForm";
-import FXInput from "@/src/components/form/FXInput";
-import { useUserRegistration } from "@/src/hooks/auth.hooks";
-import { registerUser } from "@/src/services/authService";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/button";
-import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+
+import { useUserRegistration } from "@/src/hooks/auth.hooks";
+import FXInput from "@/src/components/form/FXInput";
+import FXForm from "@/src/components/form/FXForm";
 
 const Page = () => {
   const { mutate: handleUserRegistration, isPending } = useUserRegistration();
@@ -22,6 +20,7 @@ const Page = () => {
 
     handleUserRegistration(userData);
   };
+
   return (
     <div className="flex h-[calc(100vh-100px)] flex-col items-center justify-center">
       <h3 className="my-2 text-xl font-bold">Register with FoundX</h3>

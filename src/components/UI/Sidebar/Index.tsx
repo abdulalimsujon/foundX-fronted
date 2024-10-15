@@ -1,9 +1,11 @@
 "use client";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
-import { useUser } from "@/src/context/user.provider";
+
 import { SidebarOptions } from "./SidebarOption";
 import { adminLinks, userLinks } from "./constants";
+
+import { useUser } from "@/src/context/user.provider";
 
 const Sidebar = () => {
   const { user } = useUser();

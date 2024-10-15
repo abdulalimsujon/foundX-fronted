@@ -9,11 +9,13 @@
     "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
   },
   "dependencies": {
+    "@bangladeshi/bangladesh-address": "^1.0.5",
     "@hookform/resolvers": "^3.9.0",
     "@nextui-org/avatar": "^2.0.33",
     "@nextui-org/button": "2.0.38",
     "@nextui-org/card": "^2.0.34",
     "@nextui-org/code": "2.0.33",
+    "@nextui-org/date-picker": "^2.1.8",
     "@nextui-org/dropdown": "^2.1.31",
     "@nextui-org/input": "2.2.5",
     "@nextui-org/kbd": "2.0.34",
@@ -21,6 +23,7 @@
     "@nextui-org/listbox": "2.1.27",
     "@nextui-org/navbar": "2.0.37",
     "@nextui-org/react": "^2.4.8",
+    "@nextui-org/select": "^2.2.7",
     "@nextui-org/skeleton": "^2.0.32",
     "@nextui-org/snippet": "2.0.43",
     "@nextui-org/spinner": "^2.0.34",

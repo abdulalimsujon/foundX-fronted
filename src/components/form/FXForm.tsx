@@ -1,5 +1,4 @@
-'use client'
-
+"use client";
 
 import { ReactNode } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
@@ -16,6 +15,7 @@ interface IProps extends IConfig {
 
 const FXForm = ({ children, onSubmit, defaultValues, resolver }: IProps) => {
   const formConfig: IConfig = {};
+
   if (!!defaultValues) {
     formConfig["defaultValues"] = defaultValues;
   }
@@ -24,6 +24,7 @@ const FXForm = ({ children, onSubmit, defaultValues, resolver }: IProps) => {
   }
   const methods = useForm(formConfig);
   const submitHandler = methods.handleSubmit;
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={submitHandler(onSubmit)}>{children}</form>

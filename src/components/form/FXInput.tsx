@@ -3,7 +3,9 @@
 import { Input } from "@nextui-org/input";
 import { useFormContext } from "react-hook-form";
 
-interface InputProps {
+import { IInput } from "@/src/types";
+
+interface InputProps extends IInput {
   variant?: "flat" | "bordered" | "faded" | "underlined";
   size?: "lg" | "md" | "sm";
   required?: boolean;
@@ -24,16 +26,17 @@ const FXInput = ({
     register,
     formState: { errors },
   } = useFormContext();
+
   return (
     <Input
       errorMessage={errors[name] ? (errors[name].message as string) : ""}
       isInvalid={!!errors[name]}
       {...register(name)}
-      variant={variant}
-      size={size}
-      required={required}
-      type={type}
       label={label}
+      required={required}
+      size={size}
+      type={type}
+      variant={variant}
     />
   );
 };

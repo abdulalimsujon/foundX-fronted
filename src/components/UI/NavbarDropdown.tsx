@@ -1,21 +1,22 @@
 "use client";
-
-import { useUser } from "@/src/context/user.provider";
-import { logout } from "@/src/services/authService";
 import { Avatar } from "@nextui-org/avatar";
-import { Button } from "@nextui-org/button";
 import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/dropdown";
+import { usePathname, useRouter } from "next/navigation";
 
-import { useRouter } from "next/navigation";
+import { protectedRoutes } from "../../../constants";
+
+import { logout } from "@/src/services/authService";
+import { useUser } from "@/src/context/user.provider";
 
 export default function NavbarDropdown() {
-  const router = useRouter();
   const { user, setIsLoading } = useUser();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleNavigation = (pathname: string) => {
     router.push(pathname);
@@ -24,6 +25,10 @@ export default function NavbarDropdown() {
   const handleLogOut = () => {
     logout();
     setIsLoading(true);
+
+    if (protectedRoutes.some((route) => pathname.match(route))) {
+      router.push("/");
+    }
   };
 
   return (
@@ -43,10 +48,10 @@ export default function NavbarDropdown() {
         </DropdownItem>
 
         <DropdownItem
-          onClick={() => handleLogOut()}
           key="delete"
           className="text-danger"
           color="danger"
+          onClick={() => handleLogOut()}
         >
           Logout
         </DropdownItem>
