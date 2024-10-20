@@ -1,7 +1,10 @@
+"use server";
+
 import axios from "axios";
+import { cookies } from "next/headers";
 
 import envConfig from "@/src/config/envConfig";
-import { cookies } from "next/headers";
+import { getNewAccessToken } from "@/src/services/authService";
 
 const AxiosInstance = axios.create({
   baseURL: envConfig.baseApi,
@@ -16,6 +19,7 @@ AxiosInstance.interceptors.request.use(
     if (accessToken) {
       config.headers.Authorization = accessToken;
     }
+
     return config;
   },
   function (error) {
@@ -29,6 +33,28 @@ AxiosInstance.interceptors.response.use(
   },
   function (error) {
     return Promise.reject(error);
+  },
+);
+
+AxiosInstance.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  async function (error) {
+    const config = error.config;
+
+    if (error?.response?.status === 401 && !config?.sent) {
+      config.sent = true;
+      const res = await getNewAccessToken();
+      const accessToken = res.data.accessToken;
+
+      config.headers["Authorization"] = accessToken;
+      cookies().set("accessToken", accessToken);
+
+      return AxiosInstance(config);
+    } else {
+      return Promise.reject(error);
+    }
   },
 );
 

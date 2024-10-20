@@ -61,3 +61,21 @@ export const getCurrentUser = async () => {
 
   return decodeToken;
 };
+export const getNewAccessToken = async () => {
+  try {
+    const refreshToken = cookies().get("refreshToken")?.value;
+
+    const res = await AxiosInstance({
+      url: "/auth/refresh-token",
+      method: "POST",
+      withCredentials: true,
+      headers: {
+        cookie: `refreshToken=${refreshToken}`,
+      },
+    });
+
+    return res.data;
+  } catch (error) {
+    throw new Error("Failed to get new access token");
+  }
+};

@@ -55,3 +55,14 @@ export interface IInput {
   name: string;
   disabled?: boolean;
 }
+export interface IFeedbackStatus {
+  feedback: string;
+  status: string;
+}
+
+export interface ISearchResult {
+  title: string;
+  description: string;
+  thumbnail: string;
+  id: string;
+}

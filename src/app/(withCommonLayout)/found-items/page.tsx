@@ -1,9 +1,25 @@
-const page = () => {
-  return (
-    <div>
-      <h1>This is found items page</h1>
-    </div>
-  );
-};
+import Filtering from "@/src/components/modules/found-items/Filtering";
+import Container from "@/src/components/UI/Container";
+import Post from "@/src/components/UI/Post";
+import axiosInstance from "@/src/lib/AxiosInstance";
+import { IPost } from "@/src/types";
 
-export default page;
+export default async function FoundItems({
+  searchParams,
+}: {
+  searchParams: any;
+}) {
+  const params = new URLSearchParams(searchParams);
+  const { data } = await axiosInstance.get(`/items`, {
+    params: { searchTerm: params.get("query") },
+  });
+
+  return (
+    <Container>
+      <div className="mx-auto my-3 max-w-[720px]">
+        <Filtering />
+        {data?.data?.map((post: IPost) => <Post key={post?._id} post={post} />)}
+      </div>
+    </Container>
+  );
+}

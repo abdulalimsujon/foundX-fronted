@@ -1,3 +1,4 @@
+"use server";
 import envConfig from "@/src/config/envConfig";
 
 export const getRecentsPosts = async () => {
